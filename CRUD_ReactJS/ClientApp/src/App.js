@@ -8,6 +8,7 @@ import { ContactUs } from './components/ContactUs';
 import { Layout } from './components/Layout/Layout';
 import CalculatorPage   from'./components/Calculator/CalculatorPage';
 import { Register } from './components/Account/Register';
+import { Login } from './components/Account/Login';
 export default class App extends Component {
     displayName = App.name
 
@@ -22,6 +23,7 @@ export default class App extends Component {
                 <Route path='/InsertProduct' component={InsertProduct} />
                 <Route path='/Calculator' component={CalculatorPage} />
                 <Route path='/Register' component={Register} />
+                <Route path='/Login' component={Login} />
             </Layout>
         );
     }

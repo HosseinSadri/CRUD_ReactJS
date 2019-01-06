@@ -4,16 +4,16 @@ import * as Yup from 'yup';
 import { setTimeout } from 'timers';
 import { MessageModal } from '../Layout/MessageModal'
 //bootstrap 3.3.7
-export class Register extends Component {
+export class Login extends Component {
     state = { status: false }
     render() {
         return (
             <div>
                 <Formik
-                    initialValues={{ Email: "", Password: "", RePassword: "" }}
+                    initialValues={{ Email: "", Password: "" }}
                     onSubmit={(values, { setSubmitting }) => {
                         //console.log(values)
-                        fetch(`/api/Account/RegisterConfirm?model=${JSON.stringify(values)}`, { method: 'Post' })
+                        fetch(`/api/Account/LoginConfirm?model=${JSON.stringify(values)}`, { method: 'Post' })
                         this.setState({ status: true })
                         setTimeout(() => {
                             setSubmitting(false)
@@ -21,12 +21,10 @@ export class Register extends Component {
                         }, 3000);
                         values.Email = "";
                         values.Password = "";
-                        values.RePassword = "";
                     }}
                     validationSchema={Yup.object().shape({
                         Email: Yup.string().required("Required!!"),
                         Password: Yup.string().required("Required!!"),
-                        RePassword: Yup.string().required("Required!!")
                     })}
                 >
                     {props => {
@@ -43,11 +41,11 @@ export class Register extends Component {
 
                             <div className="col-md-4 col-md-offset-4">
                                 {this.state.status
-                                    ? < MessageModal Header="Register Form" Message="Register Succefully." />
+                                    ? < MessageModal Header="Login Form" Message="Login Succefully." />
                                     : null
                                 }
                                 <form className="FormSubmit" onSubmit={handleSubmit}>
-                                    <h3 className="text-center">Register Form</h3>
+                                    <h3 className="text-center">Login Form</h3>
                                     <div className="form-Group">
                                         <label>Email</label>
                                         <input
@@ -79,22 +77,6 @@ export class Register extends Component {
                                             }
                                         />
                                         {errors.Password && touched.Password && (<div className="input-feedback">{errors.Password}</div>)}
-                                    </div>
-                                    <div className="form-Group">
-                                        <label>RePassword</label>
-                                        <input
-                                            id="RePassword"
-                                            placeholder="Enter Password Again"
-                                            type="text"
-                                            value={values.RePassword}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            className={errors.RePassword && touched.RePassword
-                                                ? "form-control error"
-                                                : "form-control"
-                                            }
-                                        />
-                                        {errors.RePassword && touched.RePassword && (<div className="input-feedback">{errors.RePassword}</div>)}
                                     </div>
                                     <div className="form-Group">
                                         <button type="submit"
