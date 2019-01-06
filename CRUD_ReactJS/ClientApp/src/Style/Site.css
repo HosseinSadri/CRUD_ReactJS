@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Work Sans',sans-serif;
+    background: #f4f4ef;
+}
+.content {
+    margin-top:65px;
+    margin-bottom:40px
+}
+.magenta {
+    color: darkgray;
+}
+.btn-remove {
+    background-color: palevioletred;
+    color: white;
+}
+
+div.footer {
+    height: 12px;
+    width: 100%;
+    position: fixed;
+    bottom: 30pt;
+}
+div.footercon {
+    height: 90px;
+    width: 100%;
+    padding-top: 15px;
+    background-color: #f4f4ef;
+    background: -webkit-radial-gradient(50% 0%, 50% 10px, #b9b9a0 10%, #f4f4ef 90%);
+}
+div.form-group {
+    padding-bottom: 5px;
+}
+span.ErrorSpan {
+    color: red;
+}
+
+div.heartCricle {
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+.imageStyle {
+    filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(330deg) brightness(95%) contrast(80%);
+}
+.imageStyleDef {
+    filter: opacity(100%);
+    
+}
+.CalcBtn {
+    font-size:18px;
+    margin:3px;
+    color: black;
+    width:65px;
+    height:50px;
+    border:none;
+}
+
+
+.CalcText {
+    font-size: 18px;
+    margin: 3px;
+    color: Black;
+    width: 280px;
+    height: 50px;
+    border: none;
+    padding-left: 15px;
+}
+.CalcTextResult {
+    font-size: 20px;
+    margin: 3px;
+    color: Black;
+    background-color: seashell;
+    width: 280px;
+    height: 30px;
+    border: none;
+    padding-left: 15px;
+}
+
+abbr[title] {
+    /*border-bottom: none !important;*/
+    /*cursor: inherit !important;*/
+    text-decoration: none !important;
+}
+
