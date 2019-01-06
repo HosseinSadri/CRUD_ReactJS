@@ -49,7 +49,7 @@ export class Register extends Component {
                                 <form className="FormSubmit" onSubmit={handleSubmit}>
                                     <h3 className="text-center">Register Form</h3>
                                     <div className="form-Group">
-                                        <label>Name</label>
+                                        <label>Email</label>
                                         <input
                                             id="Email"
                                             placeholder="Enter Your Email"
