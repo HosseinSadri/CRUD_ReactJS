@@ -6,8 +6,9 @@ body {
     background: #f4f4ef;
 }
 .content {
-    margin-top:65px;
-    margin-bottom:40px
+    margin-top: 65px;
+    margin-bottom: 40px;
+    height: calc(100vh - 10px);
 }
 .magenta {
     color: darkgray;
@@ -29,6 +30,11 @@ div.footercon {
     padding-top: 15px;
     background-color: #f4f4ef;
     background: -webkit-radial-gradient(50% 0%, 50% 10px, #b9b9a0 10%, #f4f4ef 90%);
+}
+@media (max-height:400px) {
+    div.footer {
+        display: none;
+    }
 }
 div.form-group {
     padding-bottom: 5px;

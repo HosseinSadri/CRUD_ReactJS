@@ -27,7 +27,7 @@ namespace CRUD_ReactJS.Controllers
                 Count=x.Count,
                 Brand= x.productBrand.Name,
                 City= x.city.Name,
-                Province=x.city.province.Name,
+                Province=x.city.province.name,
             };
         [HttpGet("[action]")]
         public IActionResult ProductList()

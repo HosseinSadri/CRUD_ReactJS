@@ -22,6 +22,19 @@ namespace CRUD_ReactJS.Areas.Identity
 
                 services.AddDefaultIdentity<ApplicationUser>()
                     .AddEntityFrameworkStores<CRUD_ReactJSContext>();
+                services.Configure<IdentityOptions>(x =>
+                {
+                    x.Password.RequiredLength = 3;
+                    x.Password.RequireLowercase = false;
+                    x.Password.RequireUppercase = false;
+                    x.Password.RequireNonAlphanumeric = false;
+                    x.Password.RequireDigit = false;
+                    x.Password.RequiredUniqueChars = 0;
+
+                    x.Lockout.MaxFailedAccessAttempts = 3;
+                    x.Lockout.AllowedForNewUsers = true;
+                    x.Lockout.DefaultLockoutTimeSpan = new TimeSpan(0, 2, 0);
+                });
             });
         }
     }

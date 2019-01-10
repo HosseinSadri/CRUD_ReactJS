@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid } from 'react-bootstrap';
 import { Row, Col, Image } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+
 export class Circle extends Component {
     render() {
         let Items = [];
@@ -12,13 +13,15 @@ export class Circle extends Component {
     }
 }
 export class Home extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            
         }
         this.handleMouseOver = this.handleMouseOver.bind(this);
         this.handleMouseOut = this.handleMouseOut.bind(this);
     }
+
     handleMouseOver(event) {
         //event.target.width = 185;
          event.target.className = 'imageStyle' 
@@ -39,6 +42,8 @@ export class Home extends Component {
     render() {
         return (
             <Grid className="text-center">
+
+            
                 <h1>ReactJS Web Site</h1>
                 <p>Welcome to My React Js Project</p>
                 <hr />

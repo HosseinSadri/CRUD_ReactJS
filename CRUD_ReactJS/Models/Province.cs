@@ -8,7 +8,7 @@ namespace CRUD_ReactJS.Models
     public class Province
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public ICollection<City> cities { get; set; }
+        public string name { get; set; }
+        public ICollection<City> Cities { get; set; }
     }
 }

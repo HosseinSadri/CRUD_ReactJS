@@ -36,12 +36,39 @@ namespace CRUD_ReactJS.Controllers
             return View();
         }
         [HttpPost("[action]")]
-        public async Task<IActionResult> LoginConfirm(string model)
+        public async Task LoginConfirm(string model)
         {
             var LoginForm = JsonConvert.DeserializeObject<LoginForm>(model);
-            var user = await userManager.FindByEmailAsync(LoginForm.Email);
+            
+            ApplicationUser user = await userManager.FindByEmailAsync(LoginForm.Email);
             var status = await signInManager.PasswordSignInAsync(user,LoginForm.Password, true, true);
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+               
+            }
+                
+        }
+        [HttpGet("[action]")]
+        public async Task LogOut()
+        {
+            await signInManager.SignOutAsync();
+           
+            
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult AuthenticatedUser()
+        {
+            //await signInManager.SignOutAsync();
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.Identity.Name !=null)
+                {
+                    return Json(User.Identity.Name);
+                }
+
+            }
+                    return Json("no");
         }
     }
 }
