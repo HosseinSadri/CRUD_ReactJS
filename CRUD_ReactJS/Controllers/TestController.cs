@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 
 namespace CRUD_ReactJS.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class TestController : Controller
     {
         public IActionResult Index()
@@ -38,14 +40,44 @@ namespace CRUD_ReactJS.Controllers
         //    return RedirectPermanent("/InsertProduct");
         //}
         [HttpGet("[action]")]
-        public void LoadJson(int a)
+        public IActionResult LoadJson()
         {
-            using (StreamReader r = new StreamReader(@"~\files\Province.json"))
+            using (StreamReader r = new StreamReader(@"wwwroot\files\Province.json"))
             {
-                string json = r.ReadToEnd();
-                List<Province> items = JsonConvert.DeserializeObject<List<Province>>(json);
+                if (db.cities.Count() < 10)
+                {
+                    string json = r.ReadToEnd();
+                    List<Province> items = JsonConvert.DeserializeObject<List<Province>>(json);
+                    var j = 1;
+                    foreach (var item in items)
+                    {
+                        Province tblProvinces = new Province()
+                        {
+                            name = item.name
+                        };
+                        db.provinces.Add(tblProvinces);
+                        db.SaveChanges();
+                        foreach (var item2 in item.Cities)
+                        {
+                            City tblCities = new City()
+                            {
+                                Name = item2.Name,
+                                Province_Id = j,
+                            };
+                            db.cities.Add(tblCities);
+                            db.SaveChanges();
+                        }
+                        ++j;
+                    }
+                return Json("ok");
+                }
+                return Json("exist");
             }
-
+        }
+        [HttpGet("[action]")]
+        public IActionResult test3(int a)
+        {
+            return Json(a);
         }
     }
 }

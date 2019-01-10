@@ -8,6 +8,7 @@ using CRUD_ReactJS.Models;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.IO;
 
 namespace CRUD_ReactJS.Controllers
 {
@@ -23,11 +24,11 @@ namespace CRUD_ReactJS.Controllers
             x => new ProductList
             {
                 Name = x.Name,
-                Price=x.Price,
-                Count=x.Count,
-                Brand= x.productBrand.Name,
-                City= x.city.Name,
-                Province=x.city.province.name,
+                Price = x.Price,
+                Count = x.Count,
+                Brand = x.productBrand.Name,
+                City = x.city.Name,
+                Province = x.city.province.name,
             };
         [HttpGet("[action]")]
         public IActionResult ProductList()
@@ -51,6 +52,41 @@ namespace CRUD_ReactJS.Controllers
             db.Add(tbl);
             db.SaveChanges();
             return ("ok");
+        }
+        [HttpGet("[action]")]
+        public IActionResult LoadJsonCity()
+        {
+            if (db.cities.Count() < 10)
+            {
+                using (StreamReader r = new StreamReader(@"wwwroot\files\Province.json"))
+                {
+                    string json = r.ReadToEnd();
+                    List<Province> items = JsonConvert.DeserializeObject<List<Province>>(json);
+                    var j = 1; //last inserted id
+                    foreach (var item in items)
+                    {
+                        Province tblProvinces = new Province()
+                        {
+                            name = item.name
+                        };
+                        db.provinces.Add(tblProvinces);
+                        db.SaveChanges();
+                        foreach (var item2 in item.Cities)
+                        {
+                            City tblCities = new City()
+                            {
+                                Name = item2.Name,
+                                Province_Id = j,
+                            };
+                            db.cities.Add(tblCities);
+                            db.SaveChanges();
+                        }
+                        ++j;
+                    }
+                    return Json("ok");
+                }
+            }
+                return Json("exist");
         }
     }
 }

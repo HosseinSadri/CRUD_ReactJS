@@ -9,9 +9,9 @@ export class NavBar extends Component {
             status: '',
             username: props.username
         }
-        
+
     }
-    
+
     componentWillReceiveProps(props) {
         this.setState({
             username: this.props.username
@@ -22,52 +22,54 @@ export class NavBar extends Component {
     test2 = () => {
         console.log('test2');
         fetch('api/Test/LoadJson?a=1')
-        
-    }
-    test = () => {
-        //this.setState({ username: this.props.username })
-        //console.log(this.state)
-        //console.log('props:')
-        //console.log(this.props)
-    }
-    GetAutenticationStatus = () => {
-    console.log(this.props.username);
-        console.log('getStatus:');
-        fetch('api/Account/AuthenticatedUser')
-            .then(res => res.json())
             .then(x => {
                 console.log(x);
-                console.log(this.props.username);
-                this.setState({ username: x });
             });
     }
+    test = () => {
+                    //this.setState({ username: this.props.username })
+                    //console.log(this.state)
+                    //console.log('props:')
+                    //console.log(this.props)
+                }
+    GetAutenticationStatus = () => {
+                    console.log(this.props.username);
+                    console.log('getStatus:');
+                    fetch('api/Account/AuthenticatedUser')
+                        .then(res => res.json())
+                        .then(x => {
+                            console.log(x);
+                            console.log(this.props.username);
+                            this.setState({ username: x });
+                        });
+                }
     logout = () => {
-        console.log('inlogout:');
-        fetch('api/Account/LogOut')
-            .then(x => {
-                console.log('logout successfully')
-                this.setState({ username: '' });
-            });
-    }
+                    console.log('inlogout:');
+                    fetch('api/Account/LogOut')
+                        .then(x => {
+                            console.log('logout successfully')
+                            this.setState({ username: '' });
+                        });
+                }
     handleMouseOut = (event) => {
-        setTimeout(() => {
-            this.setState({
-                status: 'none'
-            })
-        }, 500);
-    }
+                    setTimeout(() => {
+                        this.setState({
+                            status: 'none'
+                        })
+                    }, 500);
+                }
     handleMouseOver = () => {
-        this.setState({
-            status: ''
-        })
-    }
+                    this.setState({
+                        status: ''
+                    })
+                }
     handleClick = () => {
-        this.setState({
-            status: ''
-        })
-    }
+                    this.setState({
+                        status: ''
+                    })
+                }
     render() {
-        return (
+                    return(
             <div>
 
                 <Navbar collapseOnSelect fixedTop>
@@ -140,7 +142,7 @@ export class NavBar extends Component {
                 <hr />
                 <button className="btn btn-success" onClick={this.test2}>test2</button>
 
-            </div>
+            </div >
         );
     }
 }
