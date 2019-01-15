@@ -4,6 +4,7 @@ import { Home } from './components/Home';
 import { About } from './components/About';
 import { ProductList } from './components/Product/ProductList';
 import { InsertProduct } from './components/Product/InsertProduct';
+import { EditProduct } from './components/Product/EditProduct';
 import { ContactUs } from './components/ContactUs';
 import { Layout } from './components/Layout/Layout';
 import CalculatorPage   from'./components/Calculator/CalculatorPage';
@@ -24,6 +25,7 @@ export default class App extends Component {
                 <Route path='/Calculator' component={CalculatorPage} />
                 <Route path='/Register' component={Register} />
                 <Route path='/Login' component={Login} />
+                <Route path='/EditProduct/:testvalue' component={EditProduct} />
             </Layout>
         );
     }

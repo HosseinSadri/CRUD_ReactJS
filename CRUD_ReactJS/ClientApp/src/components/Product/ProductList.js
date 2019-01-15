@@ -8,6 +8,12 @@ export class ProductList extends Component {
         this.state = { ProductList: [] };
         this.GetProductList();
     }
+    componentDidMount() {
+       // this.GetProductList();
+    }
+    componentWillUnmount() {
+       // this.setState({ ProductList: [] });
+    }
     GetProductList() {
         fetch('api/product/ProductList')
             .then(res => res.json())
@@ -32,6 +38,7 @@ export class ProductList extends Component {
                         </LinkContainer>
                     </Col>
                 </div>
+               
                 <Table hover>
                     <thead>
                         <tr>
@@ -59,9 +66,11 @@ export class ProductList extends Component {
                                     </Button>
                                 </td>
                                 <td className='col-xs-1'>
-                                    <Button bsStyle="info">
-                                        <Glyphicon glyph="pencil" />
-                                    </Button>
+                                    <LinkContainer to={`/EditProduct/${item.id}`} >
+                                        <Button bsStyle="info">
+                                            <Glyphicon glyph="pencil" />
+                                        </Button>
+                                    </LinkContainer>
                                 </td>
                                 <td className='col-xs-1'>
                                     <Button bsStyle="danger">

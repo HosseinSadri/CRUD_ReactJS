@@ -23,6 +23,7 @@ namespace CRUD_ReactJS.Controllers
         private static readonly Expression<Func<Product, ProductList>> Asnewtbl =
             x => new ProductList
             {
+                Id=x.Id,
                 Name = x.Name,
                 Price = x.Price,
                 Count = x.Count,
@@ -38,7 +39,7 @@ namespace CRUD_ReactJS.Controllers
             return Json(product_tbl);
         }
         [HttpPost("[action]")]
-        public string InsertProduct2(string model)
+        public string InsertProduct(string model)
         {
             var modelClass = JsonConvert.DeserializeObject<ProductInsert>(model);
             Product tbl = new Product
@@ -47,14 +48,34 @@ namespace CRUD_ReactJS.Controllers
                 Price = modelClass.Price,
                 Count = modelClass.Count,
                 Brand_Id = 1,
-                City_Id = 1
+                City_Id = 2441
             };
             db.Add(tbl);
             db.SaveChanges();
             return ("ok");
         }
         [HttpGet("[action]")]
-        public IActionResult LoadJsonCity()
+        public IActionResult ProductDetails(int id)
+        {
+            var SelectedProduct = db.products.Find(id);
+            // var SelectedProduct = db.products.Select(Asnewtbl).ToList();
+            //SelectedProduct.Name = "reza";
+            return Json(SelectedProduct);
+        }
+        [HttpPut("[action]")]
+        public IActionResult EditProduct(string model,int Id)
+        {
+            var modelClass = JsonConvert.DeserializeObject<ProductInsert>(model);
+            //var SelectedProduct= db.products.Find(id);
+            var SelectedProduct= db.products.Find(Id);
+            SelectedProduct.Name = modelClass.Name;
+            SelectedProduct.Price = modelClass.Price;
+            SelectedProduct.Count = modelClass.Count;
+            db.SaveChanges();
+            return Json("");
+        }
+        [HttpGet("[action]")]
+        public IActionResult SaveCitiesSql()
         {
             if (db.cities.Count() < 10)
             {
@@ -86,7 +107,30 @@ namespace CRUD_ReactJS.Controllers
                     return Json("ok");
                 }
             }
-                return Json("exist");
+            return Json("exist");
+        }
+        public class ProvinceV
+        {
+            public int ProvienceId { get; set; }
+            public string Provience { get; set; }
+            public ICollection<City> city { get; set; }
+        }
+     
+
+
+        private static readonly Expression<Func<Province, ProvinceV>> proviencecities =
+    x => new ProvinceV
+    {
+        ProvienceId = x.Id,
+        Provience = x.name,
+        city = x.Cities,
+
+    };
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetCities()
+        {
+            var tbl = await Task.Run(() => db.provinces.Select(proviencecities).ToList());
+            return Json(tbl);
         }
     }
 }

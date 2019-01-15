@@ -3,7 +3,7 @@ import { Grid } from 'react-bootstrap';
 import * as math from 'mathjs';
 //import { type } from 'os';
 //import { number } from 'prop-types';
-import input from '../ReactValidations/components/input';
+
 
 
 export default class CalculatorPage extends Component {

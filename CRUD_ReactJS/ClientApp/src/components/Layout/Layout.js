@@ -2,7 +2,7 @@
 import { NavBar } from './NavBar';
 import FooterPage from './FooterPage';
 //import { FooterPage } from './FooterPage';
-import { Redirect } from 'react-router-dom'
+
 
 export class Layout extends Component {
     constructor(props) {

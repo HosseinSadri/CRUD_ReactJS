@@ -5,23 +5,55 @@ import { setTimeout } from 'timers';
 import { MessageModal } from '../Layout/MessageModal'
 import { Cities } from '../Tools/Cities';
 //bootstrap 3.3.7
-export class InsertProduct extends Component {
-    state = { status: false }
+
+
+export class EditProduct extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            status: false,
+            ProductDetails: null,
+        }
+        //console.log(this.props.match.params.testvalue);
+    }
+    componentDidMount() {
+        fetch(`api/product/ProductDetails/?id=${this.props.match.params.testvalue}`)
+            .then(res => res.json())
+            .then(x => {
+                //console.log(JSON.stringify(x));
+                this.setState({ ProductDetails: x });
+            });
+        // console.log('componentDidMount')
+        //console.log(this.state.ProductDetails)
+    }
+    test=() =>{
+        console.log(this.state.ProductDetails)
+    }
     render() {
         return (
             <div>
-
+                <button onClick={this.test}>test</button>
                 <Formik
-                    initialValues={{ Name: "", Price: "", Count: "" }}
+                   
+                    initialValues={{
+                        Name: this.state.ProductDetails != null ? this.state.ProductDetails.name : "Name",
+                        Price: this.state.ProductDetails != null ? this.state.ProductDetails.price : "Price",
+                        Count: this.state.ProductDetails != null ? this.state.ProductDetails.count : "Count",
+                    }}
+                    //initialValues={{ Name: this.state.test, Price: "", Count: "" }}
+                    enableReinitialize={true}
                     onSubmit={(values, { setSubmitting }) => {
-                       
-                        fetch(`/api/Product/InsertProduct?model=${JSON.stringify(values)}`, { method: 'Post' })
-                        this.setState({ status: true })
+                        //console.log(values)
+                        fetch(`/api/Product/EditProduct?model=${JSON.stringify(values)}&id=${this.props.match.params.testvalue}`
+                            , { method: 'PUT' })
+                        this.setState({ status: true },
+                            ()=>this.props.history.push('/productlist')
+                        )
                         setTimeout(() => {
                             setSubmitting(false)
                             this.setState({ status: false })
                         }, 3000);
-                        console.log('hsihi');
+
                         values.Name = "";
                         values.Price = "";
                         values.Count = "";
@@ -46,16 +78,16 @@ export class InsertProduct extends Component {
 
                             <div className="col-md-4 col-md-offset-4">
                                 {this.state.status
-                                    ? < MessageModal Header="Product Insert Form" Message="Your Product Saved" />
+                                    ? < MessageModal Header="Product Update Form" Message="Your Product Updated" />
                                     : null
                                 }
                                 <form className="FormSubmit" onSubmit={handleSubmit}>
-                                    <h3 className="text-center">Insert Product</h3>
+                                    <h3 className="text-center">Update Product</h3>
                                     <div className="form-Group">
                                         <label>Name</label>
                                         <input
                                             id="Name"
-                                            placeholder="Enter Product Name"
+                                            placeholder=""
                                             type="text"
                                             value={values.Name}
                                             onChange={handleChange}
@@ -72,7 +104,7 @@ export class InsertProduct extends Component {
                                         <input
                                             id="Price"
                                             placeholder="Enter Product Price"
-                                            type="number"
+                                            type="text"
                                             value={values.Price}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
@@ -88,7 +120,7 @@ export class InsertProduct extends Component {
                                         <input
                                             id="Count"
                                             placeholder="Enter Product Count"
-                                            type="number"
+                                            type="text"
                                             value={values.Count}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
@@ -106,14 +138,14 @@ export class InsertProduct extends Component {
                                     <div>
                                         <button type="submit"
                                             disabled={isSubmitting}
-                                            className="btn btn-primary btn-block"> submit </button>
+                                            className="btn btn-primary btn-block"> Upadte Product </button>
                                     </div>
                                 </form>
                             </div>
                         )
                     }}
                 </Formik>
-            </div >
+            </div>
         )
     }
 }

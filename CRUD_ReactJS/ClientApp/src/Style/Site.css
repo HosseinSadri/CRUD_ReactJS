@@ -31,7 +31,7 @@ div.footercon {
     background-color: #f4f4ef;
     background: -webkit-radial-gradient(50% 0%, 50% 10px, #b9b9a0 10%, #f4f4ef 90%);
 }
-@media (max-height:400px) {
+@media (max-height:450px) {
     div.footer {
         display: none;
     }
