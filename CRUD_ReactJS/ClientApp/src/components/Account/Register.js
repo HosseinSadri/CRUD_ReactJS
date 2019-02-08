@@ -41,13 +41,14 @@ export class Register extends Component {
                         } = props;
                         return (
 
-                            <div className="col-md-4 col-md-offset-4">
+                            <div className="col-md-4 col-md-offset-4 ShadowOut">
                                 {this.state.status
                                     ? < MessageModal Header="Register Form" Message="Register Succefully." />
                                     : null
                                 }
                                 <form className="FormSubmit" onSubmit={handleSubmit}>
                                     <h3 className="text-center">Register Form</h3>
+                                    <hr/>
                                     <div className="form-Group">
                                         <label>Email</label>
                                         <input

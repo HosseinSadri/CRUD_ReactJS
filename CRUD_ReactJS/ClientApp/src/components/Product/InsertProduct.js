@@ -44,7 +44,7 @@ export class InsertProduct extends Component {
                         } = props;
                         return (
 
-                            <div className="col-md-4 col-md-offset-4">
+                            <div className="col-md-4 col-md-offset-4 ShadowOut" style={{ paddingBottom:'15px' }}>
                                 {this.state.status
                                     ? < MessageModal Header="Product Insert Form" Message="Your Product Saved" />
                                     : null

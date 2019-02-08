@@ -90,13 +90,18 @@ export default class CalculatorPage extends Component {
                 )}
             </div>
         );
-
+        const CalcStyle = {
+            border: '1px solid lightblue',
+            //backgroundColor: '#ccc',
+            paddingBottom: '20px',
+          
+        }
         return (
             <Grid>
 
-                <Grid className="col-sm-4 col-sm-offset-4 text-center">
-                   
+                <Grid className="col-sm-4 col-sm-offset-4 text-center ShadowOut" style={CalcStyle}>
                     <h3>Calculator</h3>
+                    <hr/>
                     <div>
                         <input
                             className="CalcText"
@@ -111,8 +116,9 @@ export default class CalculatorPage extends Component {
                     </div>
                     <div>
                         <input
-                            className="CalcTextResult"
-                            placeholder="Result"
+                            className="CalcTextResult ShadowOut"
+                            placeholder=""
+                            readonly="readonly"
                             value={this.state.result} />
                     </div>
                     <div>{ButGenerate(ButCal)}</div>

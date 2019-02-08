@@ -7,6 +7,7 @@ export class ProductList extends Component {
         super();
         this.state = { ProductList: [] };
         this.GetProductList();
+        
     }
     componentDidMount() {
        // this.GetProductList();
@@ -18,15 +19,20 @@ export class ProductList extends Component {
         fetch('api/product/ProductList')
             .then(res => res.json())
             .then(x => {
-                console.log(JSON.stringify(x));
-                this.setState({ ProductList: x });
+                if (this.refs.div1) {
+                    console.log(JSON.stringify(x));
+                    this.setState({ ProductList: x });
+                }
+               
+               // this.forceUpdate(); 
             });
     }
 
     render() {
+        
         return (
             <Grid className=''>
-                <div >
+                <div ref="div1">
                     <Col xs={7} sm={10}>
                         <h4>Product List:</h4>
                     </Col>

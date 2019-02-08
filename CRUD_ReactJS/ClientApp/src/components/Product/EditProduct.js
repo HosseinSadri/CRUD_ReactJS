@@ -20,8 +20,11 @@ export class EditProduct extends Component {
         fetch(`api/product/ProductDetails/?id=${this.props.match.params.testvalue}`)
             .then(res => res.json())
             .then(x => {
-                //console.log(JSON.stringify(x));
+                if (this.refs.div1) {
+
                 this.setState({ ProductDetails: x });
+                }
+                //console.log(JSON.stringify(x));
             });
         // console.log('componentDidMount')
         //console.log(this.state.ProductDetails)
@@ -31,7 +34,7 @@ export class EditProduct extends Component {
     }
     render() {
         return (
-            <div>
+            <div ref="div1">
                 <button onClick={this.test}>test</button>
                 <Formik
                    
